@@ -11,6 +11,7 @@ public class ZoneEndTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Debug.LogWarning("zone end trigger çalýþtý");
         if (other.gameObject.CompareTag("Player"))
         {
             levelManager.EndZone();

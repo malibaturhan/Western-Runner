@@ -19,7 +19,7 @@ public class PlayerGroundGravity : MonoBehaviour
     {
         if (transform.position.y > 0.05f)
         {
-            transform.position += Vector3.Lerp(transform.position,Vector3.down, gravity * Time.deltaTime);
+            transform.position += Vector3.Lerp(transform.position, Vector3.down, gravity * Time.deltaTime);
         }
     }
 
@@ -33,6 +33,6 @@ public class PlayerGroundGravity : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.LogWarning("kafam havada");
+        //Debug.LogWarning("kafam havada");
     }
 }

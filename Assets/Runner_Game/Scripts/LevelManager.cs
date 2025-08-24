@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
 
     [Header("***Actions***")]
     public static Action ZoneEndedAction;
+
+
     private void Awake()
     {
         roadGenerator.SetLaneCount(level.laneCount);
@@ -30,18 +32,22 @@ public class LevelManager : MonoBehaviour
 
     public void EndZone()
     {
-        Debug.LogError("THIS ZONE ENDED");
+        //Debug.LogError("THIS ZONE ENDED");
         SetNewZone();
         ReplaceZoneEndTrigger();
     }
     private void SetNewZone()
     {
-        throw new NotImplementedException();
+        Debug.Log("SETTING new ZONE");
+        Zone selectedZone = level.SelectNewZone();
     }
     private void ReplaceZoneEndTrigger()
     {
-        throw new NotImplementedException();
+        //Debug.LogWarning("ZONE END TRIGGER REPLACED TO " + Vector3.forward * level.Zone.ZoneLength);
+        zoneEndTrigger.transform.position += Vector3.forward * level.Zone.ZoneLength;
     }
+
+    
 
 
 }
