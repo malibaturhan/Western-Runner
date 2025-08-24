@@ -7,8 +7,8 @@ public class RoadRefreshTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.LogWarning("Attempting to refresh road");
-            roadGenerator.RearrangeTilesForward();
+            roadGenerator.RefreshRoad();
+
         }
     }
 }

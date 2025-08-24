@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 
@@ -12,24 +13,27 @@ public class RoadGenerator : MonoBehaviour
     [Tooltip("Road is build with same amount of items\n" +
         "After this position tiles backwards will be reconstructed at front")]
     [SerializeField] private int roadRefreshPosition = 15;
+    [SerializeField] private int triggerOffset = 10;
     [SerializeField] private float blockRoadWidth;
     [SerializeField] private float blockRoadHeight;
     [SerializeField] private List<GameObject> roadTilePrefabs;
 
     [Header("***Elements***")]
-    private List<GameObject> roadTiles;
+    private Queue<GameObject> roadTiles;
     [SerializeField] private Transform roadParent;
     [SerializeField] private GameObject refreshTrigger;
 
     [Header("***Temporary Variables***")]
-    private int lastRoadTileZCoordinate; // as block
+    private int lastRoadTileZCoordinate = 0; // as block
+    
 
     void Start()
     {
+        roadTiles = new Queue<GameObject>();
         CenterRoad();
-        roadTiles = new(roadWidth * roadLength);
         LoadRoadTiles();
         ArrangeRoadTiles();
+        RelocateRefreshTrigger();
     }
 
 
@@ -42,18 +46,14 @@ public class RoadGenerator : MonoBehaviour
                                         transform.position.z);
     }
 
-    void Update()
-    {
-
-    }
     private void LoadRoadTiles()
     {
         var chosenTileIndex = UnityEngine.Random.Range(0, roadTilePrefabs.Count);
-        Debug.Log(chosenTileIndex.ToString());
         for (int i = 0; i < roadWidth * roadLength; i++)
         {
-            Debug.Log(i);
-            roadTiles.Add(Instantiate(roadTilePrefabs[chosenTileIndex], roadParent));
+            var tile = Instantiate(roadTilePrefabs[chosenTileIndex], roadParent);
+            tile.gameObject.tag = "Ground";
+            roadTiles.Enqueue(tile);
         }
     }
 
@@ -62,14 +62,52 @@ public class RoadGenerator : MonoBehaviour
     {
         int tileCount = 0;
         float xInitial = blockRoadWidth;
+
         for (int z = 0; z < roadLength; z++)
         {
             for (int x = 0; x < roadWidth; x++)
             {
-                roadTiles[tileCount].transform.Translate(new Vector3(xInitial * x, 0, z * blockRoadHeight));
+                GameObject tile = roadTiles.Dequeue();
+                tile.transform.localPosition = new Vector3(xInitial * x, 0, z * blockRoadHeight);
+                roadTiles.Enqueue(tile);
                 tileCount++;
             }
+            lastRoadTileZCoordinate = roadLength - triggerOffset;
         }
+        
+    }
+
+    private void RelocateRefreshTrigger()
+    {
+        Vector3 newPosition = new Vector3(refreshTrigger.transform.position.x,
+                                          refreshTrigger.transform.position.y,
+                                          lastRoadTileZCoordinate - (roadLength - roadRefreshPosition) + triggerOffset);
+        refreshTrigger.transform.position = newPosition;
+    }
+
+    public void RefreshRoad()
+    {
+        StartCoroutine(RearrangeTilesForwardCoroutine());
+    }
+
+    private IEnumerator RearrangeTilesForwardCoroutine()
+    {
+        for (int z = 0; z < roadRefreshPosition; z++)
+        {
+            for (int x = 0; x < roadWidth; x++)
+            {
+                GameObject tile = roadTiles.Dequeue();
+                Vector3 newPos = new Vector3(tile.transform.position.x,
+                                             tile.transform.position.y,
+                                             lastRoadTileZCoordinate * blockRoadHeight
+                                             );
+                tile.transform.position = newPos;
+                roadTiles.Enqueue(tile) ;
+            }
+            lastRoadTileZCoordinate++;
+            yield return null;
+        }
+        RelocateRefreshTrigger();
     }
 
     public float[] GetRoadLanesXCoordinates()
@@ -80,21 +118,7 @@ public class RoadGenerator : MonoBehaviour
         {
             xCoordinates[x] = initialCoor + x * blockRoadWidth;
         }
-        Debug.Log(xCoordinates);
         return xCoordinates;
     }
 
-    // TURN IT IENUMERATOR LATER DUE TO PERFORMANCE ISSUES
-    public void RearrangeTilesForward()
-    {
-        int index = 0;
-        for (int z = 0; z < roadRefreshPosition; z++) 
-        {
-            for (int x = 0; x < roadWidth; x++) 
-            {
-                //roadTiles[index]
-                index++;
-            }
-        }
-    }
 }
