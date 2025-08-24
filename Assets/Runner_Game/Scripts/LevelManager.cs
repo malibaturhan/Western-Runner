@@ -1,12 +1,22 @@
+using System;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [Header("***Elements***")]
+    [Header("***Level***")]
     [SerializeField] private Level level;
 
+    [Header("***Elements***")]
+    [SerializeField] private RoadGenerator roadGenerator;
+    [SerializeField] private ObstacleGenerator obstacleGenerator;
+    [SerializeField] private GameObject zoneEndTrigger;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("***Actions***")]
+    public static Action ZoneEndedAction;
+    private void Awake()
+    {
+        roadGenerator.SetLaneCount(level.laneCount);
+    }
     void Start()
     {
         
@@ -17,4 +27,21 @@ public class LevelManager : MonoBehaviour
     {
         
     }
+
+    public void EndZone()
+    {
+        Debug.LogError("THIS ZONE ENDED");
+        SetNewZone();
+        ReplaceZoneEndTrigger();
+    }
+    private void SetNewZone()
+    {
+        throw new NotImplementedException();
+    }
+    private void ReplaceZoneEndTrigger()
+    {
+        throw new NotImplementedException();
+    }
+
+
 }

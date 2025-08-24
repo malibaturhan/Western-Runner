@@ -8,7 +8,7 @@ public class RoadGenerator : MonoBehaviour
 {
 
     [Header("Settings")]
-    [SerializeField] private int roadWidth = 3;
+    private int roadWidth = 3;
     [SerializeField] private int roadLength = 15;
     [Tooltip("Road is build with same amount of items\n" +
         "After this position tiles backwards will be reconstructed at front")]
@@ -119,6 +119,11 @@ public class RoadGenerator : MonoBehaviour
             xCoordinates[x] = initialCoor + x * blockRoadWidth;
         }
         return xCoordinates;
+    }
+
+    public void SetLaneCount(int laneCount)
+    {
+        roadWidth = laneCount;
     }
 
 }
