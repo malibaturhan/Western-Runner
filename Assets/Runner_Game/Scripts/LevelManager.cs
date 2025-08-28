@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private RoadGenerator roadGenerator;
     [SerializeField] private ObstacleGenerator obstacleGenerator;
     [SerializeField] private GameObject zoneEndTrigger;
+    Zone selectedZone;
 
     [Header("***Actions***")]
     public static Action ZoneEndedAction;
@@ -30,24 +31,52 @@ public class LevelManager : MonoBehaviour
         
     }
 
+    private void CreateZoneEntities()
+    {
+        obstacleGenerator.GenerateObstacle(level.Zone.BarricadeCount, 
+                                            level.Zone.EnemyCount,
+                                            level.Zone.ZoneStartZPoint,
+                                            level.Zone.ZoneEndZPoint
+                                            );
+    }
+
     public void EndZone()
     {
         //Debug.LogError("THIS ZONE ENDED");
         SetNewZone();
+        CreateNewZoneElements();
         ReplaceZoneEndTrigger();
     }
+
+    private void CreateNewZoneElements()
+    {
+        obstacleGenerator.GenerateObstacle(selectedZone.BarricadeCount,
+                                            selectedZone.EnemyCount,
+                                            selectedZone.ZoneStartZPoint,
+                                            selectedZone.ZoneEndZPoint);
+    }
+
     private void SetNewZone()
     {
-        Debug.Log("SETTING new ZONE");
-        Zone selectedZone = level.SelectNewZone();
+        //Debug.Log("SETTING new ZONE");
+        selectedZone = level.SelectNewZone();
     }
     private void ReplaceZoneEndTrigger()
     {
-        //Debug.LogWarning("ZONE END TRIGGER REPLACED TO " + Vector3.forward * level.Zone.ZoneLength);
+        SetZoneStartEndPositions();
         zoneEndTrigger.transform.position += Vector3.forward * level.Zone.ZoneLength;
     }
 
-    
+    private void SetZoneStartEndPositions()
+    {
+        level.Zone.ZoneStartZPoint = zoneEndTrigger.transform.position.z;
+        level.Zone.ZoneEndZPoint = ZoneEndZPoint;
+    }
+
+    public float ZoneEndZPoint => zoneEndTrigger.transform.position.z + level.Zone.ZoneLength;
+
+
+
 
 
 }

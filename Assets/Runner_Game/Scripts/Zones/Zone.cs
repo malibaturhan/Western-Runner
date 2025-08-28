@@ -13,6 +13,8 @@ public class Zone : ScriptableObject
     public GameObject[] LongBarricades;
 
     [Header("***Settings***")]
+    private float zoneStartZPoint;
+    private float zoneEndZPoint;
     private float zoneStartZCoordinate;
     private float zoneEndZCoordinate;
 
@@ -25,19 +27,19 @@ public class Zone : ScriptableObject
         return ZoneName;
     }
 
-    public void SetZoneStartZCoordinate(float _zoneStartZCoordinate)
-    {
-        zoneStartZCoordinate = _zoneStartZCoordinate;
-    }
-    public void SetZoneEndZCoordinate(float _zoneEndZCoordinate)
-    {
-        if (_zoneEndZCoordinate > zoneStartZCoordinate)
+    public float ZoneStartZPoint {
+        get { return zoneStartZPoint; }
+        set
         {
-            zoneEndZCoordinate = _zoneEndZCoordinate;
+            zoneStartZPoint = value;
         }
-        else
+    }
+    public float ZoneEndZPoint
+    {
+        get { return zoneEndZPoint; }
+        set
         {
-            throw new ArgumentOutOfRangeException("End coordinate cannot be closer than start");
+            zoneEndZPoint = value;
         }
     }
 }

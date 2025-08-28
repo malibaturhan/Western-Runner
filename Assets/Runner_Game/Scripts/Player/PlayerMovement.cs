@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         GetRoadLaneXCoordinates();
+        currentRoadLaneIndex = (int)roadLaneXCoordinates.Length / 2;
     }
 
 
@@ -78,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void GetRoadLaneXCoordinates()
     {
-        roadLaneXCoordinates = roadGenerator.GetRoadLanesXCoordinates();
+        roadLaneXCoordinates = roadGenerator.GetRoadLanesXPoints();
     }
 
 }

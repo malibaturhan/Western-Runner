@@ -110,7 +110,7 @@ public class RoadGenerator : MonoBehaviour
         RelocateRefreshTrigger();
     }
 
-    public float[] GetRoadLanesXCoordinates()
+    public float[] GetRoadLanesXPoints()
     {
         var initialCoor = -roadWidth / 2 * blockRoadWidth;
         float[] xCoordinates = new float[roadWidth];
