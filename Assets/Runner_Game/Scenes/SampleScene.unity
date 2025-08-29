@@ -579,6 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f90743884df95048a7b41217323715c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swipeThreshold: 50
 --- !u!1 &731749294
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce30ec06b060504b95b031efde6de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTimeScale: 1.8
+  targetTimeScale: 1
 --- !u!4 &1844008355
 Transform:
   m_ObjectHideFlags: 0

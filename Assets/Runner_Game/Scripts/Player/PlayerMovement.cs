@@ -40,22 +40,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-        {
-            MoveLeft();
-        }
-        if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-        {
-            MoveRight();
-        }
-        if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-        {
-            Jump();
-        }
-        if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-        {
-            Tumble();
-        }
+        //if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        //{
+        //    MoveLeft();
+        //}
+        //if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+        //{
+        //    MoveRight();
+        //}
+        //if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+        //{
+        //    Jump();
+        //}
+        //if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+        //{
+        //    Tumble();
+        //}
         MoveForward();
     }
 

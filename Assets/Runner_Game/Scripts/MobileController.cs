@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MobileController : MonoBehaviour
 {
@@ -12,32 +13,32 @@ public class MobileController : MonoBehaviour
 
     void Update()
     {
-        if(Input.touchCount > 0)
+        if (Touchscreen.current == null || Touchscreen.current.primaryTouch.press.isPressed == false)
         {
-            Touch touch = Input.GetTouch(0);
-
-            switch (touch.phase) 
-            {
-                case TouchPhase.Began:
-                    startTouchPosition = touch.position;
-                    break;
-                case TouchPhase.Ended:
-                    endTouchPosition = touch.position;
-                    DetectSwipe();
-                    break;
-            }        
+            return;
+        }
+        var touch = Touchscreen.current.primaryTouch;
+        if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
+        {
+            Debug.Log($"TOUCH START: {startTouchPosition} END: {endTouchPosition}");
+            startTouchPosition = touch.position.ReadValue();
+        }
+        else if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Ended)
+        {
+            endTouchPosition = touch.position.ReadValue();
+            DetectSwipe();
+        }
     }
-}
 
     private void DetectSwipe()
     {
         Vector2 swipeOffset = endTouchPosition - startTouchPosition;
 
-        if(swipeOffset.magnitude < swipeThreshold)
+        if (swipeOffset.magnitude < swipeThreshold)
         {
-            if (Mathf.Abs(swipeOffset.x) > Mathf.Abs(swipeOffset.y)) 
+            if (Mathf.Abs(swipeOffset.x) > Mathf.Abs(swipeOffset.y))
             {
-                if(swipeOffset.x > 0)
+                if (swipeOffset.x > 0)
                 {
                     OnSwipe?.Invoke("RIGHT");
                 }

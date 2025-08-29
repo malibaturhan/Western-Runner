@@ -43,9 +43,9 @@ public class ObstacleGenerator : MonoBehaviour
         }
         var obstacle = (element as MonoBehaviour);
         var randomZ = UnityEngine.Random.Range(zStart, zEnd);
-        Debug.Log("RandomZ: " + randomZ);
-        Debug.Log("z start: " + zStart);
-        Debug.Log("z end: " + zEnd);
+        //Debug.Log("RandomZ: " + randomZ);
+        //Debug.Log("z start: " + zStart);
+        //Debug.Log("z end: " + zEnd);
         obstacle.transform.position = new Vector3(lanesXPoints[lane], 0, randomZ);
     }
 
