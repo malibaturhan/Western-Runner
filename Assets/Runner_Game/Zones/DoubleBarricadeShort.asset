@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 239a25c3304d86f4dbd62f210abaebfe, type: 3}
+  m_Name: DoubleBarricadeShort
+  m_EditorClassIdentifier: 
+  Name: DoubleBarricadeShort
+  ZoneLength: 30
+  BarricadeCount: 2
+  EnemyCount: 0
+  ShortBarricades:
+  - {fileID: 1961906746629936, guid: 54f2a90a1ea43574da9770d622ecf47d, type: 3}
+  - {fileID: 1948341714258348, guid: e4aa27bfbe6b74f4f84d5727b7c212e5, type: 3}
+  LongBarricades: []

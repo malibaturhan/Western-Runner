@@ -27,7 +27,7 @@ public class PlayerGroundGravity : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("hit ground and gravity is zero");
+            //Debug.Log("hit ground and gravity is zero");
         }
     }
 

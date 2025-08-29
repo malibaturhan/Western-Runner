@@ -9,6 +9,8 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField] private RoadGenerator roadGenerator;
     private float[] lanesXPoints;
     [SerializeField] private ObstaclePool obstaclePool;
+    private List<int> occupiedLanesIndices = new();
+    [SerializeField] LevelManager levelManager;
 
     private void Start()
     {
@@ -19,7 +21,7 @@ public class ObstacleGenerator : MonoBehaviour
     private float GetLaneXPoint(int laneIndex) => lanesXPoints[laneIndex];
     private int SpawnObstacle(List<int> exceptionLanes)
     {
-        Debug.Log("Creating obstacle");
+        //Debug.Log("Creating obstacle");
         Obstacle obstacle = obstaclePool.obstaclePool.Get();
         PlaceElement(obstacle);
         return 0;
@@ -33,14 +35,22 @@ public class ObstacleGenerator : MonoBehaviour
 
     private void PlaceElement(IObstacle element)
     {
-        Debug.Log($"element placed: {element}");
+        var lane = ChooseLane();
+        while (occupiedLanesIndices.Contains(lane))
+        {
+            lane = ChooseLane();
+        }
+        var obstacle = (element as MonoBehaviour);
+        // FIX THIS LATER
+        var randomZ = UnityEngine.Random.Range(-10,10);
+        obstacle.transform.position = new Vector3(lanesXPoints[lane], 0, randomZ);
     }
 
     public void GenerateObstacle(int ObstacleCount, int enemyCount, float zoneStartZCoordinate, float zoneEndZCoordinate)
     {
-        Debug.Log("GENERATING OBSTACLES");
+        //Debug.Log("GENERATING OBSTACLES");
         List<int> usedLanes = new(3);
-        for (int i = 0; i < ObstacleCount; i++) 
+        for (int i = 0; i < ObstacleCount; i++)
         {
             usedLanes.Add(SpawnObstacle(usedLanes));
         }
@@ -49,5 +59,15 @@ public class ObstacleGenerator : MonoBehaviour
             usedLanes.Add(SpawnEnemy(usedLanes));
         }
 
+    }
+
+    private int GetRandomLane(List<int> occupiedLanes)
+    {
+        return -1;
+    }
+
+    public void ResetOccupiedLanes()
+    {
+        occupiedLanesIndices.Clear();
     }
 }

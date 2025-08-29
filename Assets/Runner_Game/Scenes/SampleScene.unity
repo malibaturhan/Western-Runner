@@ -190,6 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadGenerator: {fileID: 250877054}
   obstaclePool: {fileID: 392849076}
+  levelManager: {fileID: 1521373373}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,15 +1149,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4214182013524040537, guid: 43aaf3906c57f684382806f640f0fd21, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.14169449
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4214182013524040537, guid: 43aaf3906c57f684382806f640f0fd21, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.71087784
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4214182013524040537, guid: 43aaf3906c57f684382806f640f0fd21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.32
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4214182013524040537, guid: 43aaf3906c57f684382806f640f0fd21, type: 3}
       propertyPath: m_LocalRotation.w

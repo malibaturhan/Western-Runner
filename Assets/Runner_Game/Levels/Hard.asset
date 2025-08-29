@@ -16,3 +16,4 @@ MonoBehaviour:
   laneCount: 5
   zones:
   - {fileID: 11400000, guid: ea558e3cde21dd04aa318262d20574f5, type: 2}
+  - {fileID: 11400000, guid: 5c0c6652fb90aa045a3050f099a94a98, type: 2}

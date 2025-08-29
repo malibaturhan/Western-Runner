@@ -9,7 +9,6 @@ public class Level : ScriptableObject
 
     [Header("Zones can be included this level")]
     public Zone[] zones;
-    private Zone activeZone;
 
     private void OnValidate()
     {
@@ -25,16 +24,14 @@ public class Level : ScriptableObject
         }
     }
 
-    public Zone SelectNewZone()
+    public Zone[] SelectNewZones(int numOfZones)
     {
-        Zone nextZone = zones[Random.Range(0, zones.Length)];
-        if (nextZone == null)
+        var newZones = new Zone[numOfZones];
+        for (int i = 0; i < numOfZones; i++)
         {
-            Debug.LogError("SELECT NEW ZONE IN LEVEL S.O. IS FAILED");
+            Zone nextZone = zones[Random.Range(0, zones.Length)];
+            newZones[i] = nextZone;
         }
-        activeZone = nextZone;
-        return nextZone;
+        return newZones;
     }
-
-    public Zone Zone => activeZone;
 }

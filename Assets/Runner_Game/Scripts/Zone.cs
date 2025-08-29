@@ -4,9 +4,9 @@ using System;
 [CreateAssetMenu(fileName = "Zone", menuName = "Scriptable Objects/Zone")]
 public class Zone : ScriptableObject
 {
-    public string ZoneName;
+    public string Name;
     [Header("Creates a trigger at the end\nNext zone initiated")]
-    public float ZoneLength;
+    public float Length;
     public int BarricadeCount;
     public int EnemyCount;
     public GameObject[] ShortBarricades;
@@ -20,11 +20,11 @@ public class Zone : ScriptableObject
 
     public float GetZoneLength()
     {
-        return ZoneLength;
+        return Length;
     }
     public override string ToString()
     {
-        return ZoneName;
+        return Name;
     }
 
     public float ZoneStartZPoint {

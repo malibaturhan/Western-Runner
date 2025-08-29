@@ -14,7 +14,7 @@ public class ZoneEndTrigger : MonoBehaviour
         //Debug.LogWarning("zone end trigger çalýþtý");
         if (other.gameObject.CompareTag("Player"))
         {
-            levelManager.EndZone();
+            levelManager.EndZone(transform.position.z);
         }
     }
 }

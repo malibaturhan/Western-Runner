@@ -9,7 +9,7 @@ public class Obstacle : MonoBehaviour, IObstacle
 
     public void OnSpawn()
     {
-        Debug.Log("obstacle spawned");
+        //Debug.Log("obstacle spawned");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

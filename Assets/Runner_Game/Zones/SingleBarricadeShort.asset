@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 239a25c3304d86f4dbd62f210abaebfe, type: 3}
-  m_Name: SingleShortBarricade
+  m_Name: SingleBarricadeShort
   m_EditorClassIdentifier: 
-  ZoneName: SingleShortBarricade
-  ZoneLength: 100
+  Name: SingleBarricadeShort
+  ZoneLength: 30
   BarricadeCount: 1
   EnemyCount: 0
   ShortBarricades:
