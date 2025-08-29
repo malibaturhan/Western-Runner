@@ -9,7 +9,11 @@ public class PlayerPoolDespawner : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            
+            obstaclePool.obstaclePool.Release(other.gameObject.GetComponent<Obstacle>());
+        }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+
         }
     }
 }

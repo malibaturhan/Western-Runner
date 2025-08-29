@@ -14,10 +14,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<Zone> selectedZones;
     [SerializeField] private List<float> selectedZonesEndZPoints;
     private float zoneEndTriggerZPoint;
-    private float lastZoneZPoint;
+    [SerializeField] private float lastZoneZPoint;
 
     [Header("***Actions***")]
     public static Action ZoneEndedAction;
+
+    [Header("***Settings***")]
+    [SerializeField] private float zoneStartZOffset;
 
 
     private void Awake()
@@ -35,22 +38,34 @@ public class LevelManager : MonoBehaviour
         SetZoneStartEndPositions();
         CreateNewZoneElements();
         obstacleGenerator.ResetOccupiedLanes();
+        //ResetZones();
+    }
+
+    private void ResetZones()
+    {
+        Zones.Clear();
+        selectedZonesEndZPoints.Clear();
     }
 
     private void CreateNewZoneElements()
     {
+        int startIndex = selectedZonesEndZPoints.Count;
         for (int i = 0; i < CountOfNewZones; i++)
         {
-            obstacleGenerator.GenerateObstacle(selectedZones[i].BarricadeCount,
-                                                selectedZones[i].EnemyCount,
-                                                selectedZones[i].ZoneStartZPoint,
-                                                selectedZones[i].ZoneEndZPoint);
+            float zoneEnd = selectedZonesEndZPoints[i] + zoneStartZOffset;
+            float zoneStart = (zoneEnd - selectedZones[i].Length);
 
+            obstacleGenerator.GenerateObstacle(
+                selectedZones[i].BarricadeCount,
+                selectedZones[i].EnemyCount,
+                zoneStart,
+                zoneEnd);
         }
+        zoneStartZOffset = selectedZonesEndZPoints[^1];
     }
-
     private void SetNewZones()
     {
+        //Debug.Log("SETTING NEW ZONES");
         selectedZones.AddRange(level.SelectNewZones(CountOfNewZones));
     }
     private void ReplaceZoneEndTrigger()
@@ -61,10 +76,11 @@ public class LevelManager : MonoBehaviour
 
     private void SetZoneStartEndPositions()
     {
-        for (int i = 0; i < selectedZones.Count; i++)
+        int startIndex = selectedZonesEndZPoints.Count;
+        for (int i = startIndex; i < selectedZones.Count; i++)
         {
             selectedZonesEndZPoints.Add(lastZoneZPoint + selectedZones[i].Length);
-            Debug.Log($"Selected zone end point Z: {lastZoneZPoint + selectedZones[i].Length}");
+            Debug.LogWarning($"Selected zone end point Z: {lastZoneZPoint + selectedZones[i].Length}");
             lastZoneZPoint += selectedZones[i].Length;
         }
 
@@ -72,5 +88,5 @@ public class LevelManager : MonoBehaviour
 
     public List<Zone> Zones => selectedZones;
 
-
+    public float LastZoneZPoint => lastZoneZPoint;
 }
