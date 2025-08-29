@@ -19,21 +19,21 @@ public class ObstacleGenerator : MonoBehaviour
 
     private int ChooseLane() => UnityEngine.Random.Range(0, lanesXPoints.Length);
     private float GetLaneXPoint(int laneIndex) => lanesXPoints[laneIndex];
-    private int SpawnObstacle(List<int> exceptionLanes)
+    private int SpawnObstacle(List<int> exceptionLanes, float zStartPoint, float zEndPoint)
     {
         //Debug.Log("Creating obstacle");
         Obstacle obstacle = obstaclePool.obstaclePool.Get();
-        PlaceElement(obstacle);
+        PlaceElement(obstacle, zStartPoint, zEndPoint);
         return 0;
     }
 
-    private int SpawnEnemy(List<int> exceptionLanes)
+    private int SpawnEnemy(List<int> exceptionLanes, float zStartPoint, float zEndPoint)
     {
         Debug.Log("creating enemy");
         return -1;
     }
 
-    private void PlaceElement(IObstacle element)
+    private void PlaceElement(IObstacle element, float zStart, float zEnd)
     {
         var lane = ChooseLane();
         while (occupiedLanesIndices.Contains(lane))
@@ -41,8 +41,7 @@ public class ObstacleGenerator : MonoBehaviour
             lane = ChooseLane();
         }
         var obstacle = (element as MonoBehaviour);
-        // FIX THIS LATER
-        var randomZ = UnityEngine.Random.Range(-10,10);
+        var randomZ = UnityEngine.Random.Range(zStart, zEnd);
         obstacle.transform.position = new Vector3(lanesXPoints[lane], 0, randomZ);
     }
 
@@ -52,11 +51,11 @@ public class ObstacleGenerator : MonoBehaviour
         List<int> usedLanes = new(3);
         for (int i = 0; i < ObstacleCount; i++)
         {
-            usedLanes.Add(SpawnObstacle(usedLanes));
+            usedLanes.Add(SpawnObstacle(usedLanes, zoneStartZCoordinate, zoneEndZCoordinate));
         }
         for (int i = 0; i < enemyCount; i++)
         {
-            usedLanes.Add(SpawnEnemy(usedLanes));
+            usedLanes.Add(SpawnEnemy(usedLanes, zoneStartZCoordinate, zoneEndZCoordinate));
         }
 
     }

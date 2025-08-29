@@ -11,8 +11,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private RoadGenerator roadGenerator;
     [SerializeField] private ObstacleGenerator obstacleGenerator;
     [SerializeField] private GameObject zoneEndTrigger;
-    private List<Zone> selectedZones;
-    private List<float> selectedZonesEndZPoints;
+    [SerializeField] private List<Zone> selectedZones;
+    [SerializeField] private List<float> selectedZonesEndZPoints;
     private float zoneEndTriggerZPoint;
     private float lastZoneZPoint;
 
@@ -64,7 +64,8 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < selectedZones.Count; i++)
         {
             selectedZonesEndZPoints.Add(lastZoneZPoint + selectedZones[i].Length);
-            lastZoneZPoint = selectedZones[i].Length;
+            Debug.Log($"Selected zone end point Z: {lastZoneZPoint + selectedZones[i].Length}");
+            lastZoneZPoint += selectedZones[i].Length;
         }
 
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DoubleBarricadeShort
   m_EditorClassIdentifier: 
   Name: DoubleBarricadeShort
-  ZoneLength: 30
+  Length: 50
   BarricadeCount: 2
   EnemyCount: 0
   ShortBarricades:
