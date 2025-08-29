@@ -12,15 +12,11 @@ public class Obstacle : MonoBehaviour, IObstacle
         //Debug.Log("obstacle spawned");
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("player hit");
+        }
     }
 }

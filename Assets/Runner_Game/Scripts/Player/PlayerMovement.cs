@@ -22,20 +22,31 @@ public class PlayerMovement : MonoBehaviour
     {
         GetRoadLaneXCoordinates();
         currentRoadLaneIndex = (int)roadLaneXCoordinates.Length / 2;
+        MobileController.OnSwipe += HandleSwipe;
     }
 
+    private void HandleSwipe(string direction)
+    {
+        if (direction == "LEFT")
+        {
+            MoveLeft();
+        }
+        if (direction == "RIGHT")
+        {
+            MoveRight();
+        }
+    
+    }
 
     void Update()
     {
         if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
         {
-            ChangeRoadLane(currentRoadLaneIndex - 1);
-            ChangePlayerLane();
+            MoveLeft();
         }
         if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
-            ChangeRoadLane(currentRoadLaneIndex + 1);
-            ChangePlayerLane();
+            MoveRight();
         }
         if (Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
@@ -47,6 +58,19 @@ public class PlayerMovement : MonoBehaviour
         }
         MoveForward();
     }
+
+    private void MoveRight()
+    {
+        ChangeRoadLane(currentRoadLaneIndex + 1);
+        ChangePlayerLane();
+    }
+
+    private void MoveLeft()
+    {
+        ChangeRoadLane(currentRoadLaneIndex - 1);
+        ChangePlayerLane();
+    }
+
     private void Jump()
     {
         Debug.Log("JUMPING...");
@@ -80,6 +104,12 @@ public class PlayerMovement : MonoBehaviour
     private void GetRoadLaneXCoordinates()
     {
         roadLaneXCoordinates = roadGenerator.GetRoadLanesXPoints();
+    }
+
+
+    private void OnDisable()
+    {
+        MobileController.OnSwipe -= HandleSwipe;
     }
 
 }

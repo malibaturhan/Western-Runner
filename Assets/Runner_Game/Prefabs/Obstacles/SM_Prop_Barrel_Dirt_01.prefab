@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4394863713709996}
   - component: {fileID: 33617448061311254}
   - component: {fileID: 23970890364149728}
-  - component: {fileID: 64599240338203280}
   - component: {fileID: -8443403488650575287}
+  - component: {fileID: 7953091190600938848}
   m_Layer: 0
   m_Name: SM_Prop_Barrel_Dirt_01
   m_TagString: Obstacle
@@ -88,8 +88,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64599240338203280
-MeshCollider:
+--- !u!114 &-8443403488650575287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204674709695228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab38fa166ace0d74aa7d3ab23624e235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &7953091190600938848
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,22 +115,9 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43660908705056218, guid: d2b1e9bb67663804bb3b80b362049585, type: 2}
---- !u!114 &-8443403488650575287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1204674709695228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab38fa166ace0d74aa7d3ab23624e235, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 3
+  m_Size: {x: 0.2535203, y: 0.6694517, z: 0.6780432}
+  m_Center: {x: -0.025567777, y: 0.33472586, z: 0}
